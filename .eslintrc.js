@@ -4,8 +4,8 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:vue/essential',
-    '@vue/standard'
+    'plugin:vue/essential'
+    // '@vue/standard' // eslint语法校验插件
   ],
   parserOptions: {
     parser: 'babel-eslint'
