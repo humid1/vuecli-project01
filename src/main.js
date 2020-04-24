@@ -11,6 +11,12 @@ import './assets/css/font-awesome.css'
 import axios from 'axios'
 // axios配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8085/';
+// 请求拦截器
+axios.interceptors.request.use( config => {
+  // 为请求头对象，添加token 验证的 Authorization 字段
+  config.headers.Authorization = window.sessionStorage.getItem('token');
+  return config;
+})
 // 将 axios 挂载到 vue 上，prototype后的名字可以随便定义
 Vue.prototype.$http = axios;
 

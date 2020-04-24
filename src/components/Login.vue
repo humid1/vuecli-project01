@@ -3,7 +3,8 @@
         <div class="login_box">
             <!-- 头像区域 -->
             <div class="avatar_box">
-                <img src="../assets/logo.png" alt="">
+              <!-- <el-avatar :size="130" src="circleUrl"></el-avatar> -->
+              <img src="../assets/logo.png" alt="">
             </div>
             <!-- 登录表单区域 -->
             <el-form ref="loginFormRef" :model="loginForm" :rules="loginFromRules" label-width="0px" class="login_form">
@@ -31,8 +32,8 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
-        uname: '',
-        password: ''
+        uname: 'admin',
+        password: '123456'
       },
       // 这是表单的验证规则对象
       loginFromRules: {
