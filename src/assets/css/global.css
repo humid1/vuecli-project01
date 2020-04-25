@@ -4,3 +4,21 @@ html, body, #app {
     margin: 0;
     padding: 0;
 }
+/* 面包屑视图布局 */
+.el-breadcrumb {
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+/* 卡片视图布局 */
+.el-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+/* table表格 */
+.el-table {
+    margin-top: 15px;
+    font-size: 13px;
+}
+/* pagination 分页条 */
+.el-pagination {
+ margin-top: 15px;
+}

@@ -18,6 +18,8 @@
         <!-- unique-opened 只保持一个子菜单的展开 -->
         <!-- collapse 是否折叠 -->
         <!-- collapse-transition 是否开启动画 -->
+        <!-- router 是否使用 vue-router 的模式,启用该模式会在激活导航时以 index 作为 path 进行路由跳转 -->
+        <!-- default-active	当前激活菜单的 index高亮 -->
         <el-menu
           background-color="#333744"
           text-color="#fff"
@@ -25,6 +27,8 @@
           unique-opened 
           :collapse="isCollapse"
           :collapse-transition="false"
+          router
+          :default-active="activePath"
         >
           <!-- 一级菜单 -->
           <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
@@ -36,7 +40,8 @@
               <span>{{ item.authName }}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item :index="subItem.id + ''" v-for="subItem in item.childrens" :key="subItem.id">
+            <el-menu-item :index="'/' + item.path" v-for="subItem in item.childrens" :key="subItem.id"
+                @click="saveNavState('/' + item.path)">
               <template slot="title">
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
@@ -48,7 +53,9 @@
         </el-menu>
       </el-aside>
       <!-- 左侧内容主体 -->
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -66,10 +73,13 @@ export default {
             '5': 'fa fa-bar-chart',
         }, // 菜单的icon
         isCollapse: false, // 菜单是否默认收缩
+        activePath: '', // 被激活的链接地址
     };
   },
   created() {
     this.getMenuList();
+    // this.activePath = window.sessionStorage.getItem('activePath')
+    this.activePath = this.$route.path
   },
   methods: {
     logout() {
@@ -81,14 +91,19 @@ export default {
     // 获取所有菜单
     async getMenuList() {
         const { data: res } = await this.$http.get('menus');
-        console.log(res);
         if(res.code === 200){
             this.menuList = res.data;
+        } else {
+            this.$message.error('接口获取菜单栏数据失败！')
         }
     },
     // 点击按钮，切换菜单的折叠与展开
     toggleCollapse() {
         this.isCollapse = !this.isCollapse;
+    },
+    // 保存链接激活状态 
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath', activePath)
     }
   }
 };
