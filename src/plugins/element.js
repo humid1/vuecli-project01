@@ -6,7 +6,8 @@ import { Button, Form, FormItem, Input, Message, Avatar,
     Card,
     Row, Col,
     Table, TableColumn,
-    Switch, Tooltip, Pagination, Loading 
+    Switch, Tooltip, Pagination, Loading,
+    Dialog
      } from 'element-ui'
 
 Vue.use(Button)
@@ -35,3 +36,4 @@ Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Pagination)
 Vue.prototype.$loading = Loading
+Vue.use(Dialog)
