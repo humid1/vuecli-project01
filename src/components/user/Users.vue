@@ -58,6 +58,7 @@
             </el-table>
             <!-- 分页区域 -->
             <el-pagination
+                background
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="queryInfo.pageNum"
@@ -349,10 +350,15 @@ export default {
                 // 确认删除操作
                 const { data: res } = await this.$http.delete('user/' + id)
                 if(res.code === 200) {
+                    // 解决：删除当页最后一条数据，出现无数据的问题
+                    let totalPage = Math.ceil((this.total - 1) / this.queryInfo.pageSize);
+                    let currentPage = this.queryInfo.pageNum > totalPage ? totalPage : this.queryInfo.pageNum;
+                    this.queryInfo.pageNum = currentPage < 1 ? 1 : currentPage; 
+                    // 重新查询数据
+                    this.getUserList();
                     return this.$message.success(res.msg)
                 } else {
                     return this.$message.error('用户删除失败！');
-                    this.getUserList();
                 }
             }
         },
@@ -388,7 +394,17 @@ export default {
             this.selectedRoleId = ''
             this.userInfo = []
         }
-    }
+    },
+    // watch: {
+    //     total() {
+    //         // 监听删除当页最后一条数据，出现无数据的问题 (此方法会请求两次)
+    //         if(this.total == (this.queryInfo.pageNum - 1) * this.queryInfo.pageSize && this.total != 0 ) {
+    //             this.queryInfo.pageNum -= 1
+    //             // 重新获取数据
+    //             this.getUserList()
+    //         }
+    //     }
+    // }
 }
 </script>
 

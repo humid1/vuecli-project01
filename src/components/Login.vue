@@ -60,7 +60,7 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (valid) {
           // console.log('验证通过');
-          const { data: result } = await this.$http.post("login", this.loginForm);
+          const { data: result } = await this.$http.post("login", this.loginForm).catch(err => {this.$message.error('登录接口异常！' + err)});
           console.log(result);
           if(result.code !== 200){
             return this.$message.error('登录失败！账号或密码错误');
