@@ -1,25 +1,27 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-// 按需导入
-import './plugins/element.js'
+// 按需导入element-ui
+// import './plugins/element.js'
+
 // 导入全局样式表
 import './assets/css/global.css'
 // 导入字体
-import './assets/css/font-awesome.css'
+// import './assets/css/font-awesome.css'
+
 // 导入axios
 import axios from 'axios'
 import TreeTable from 'vue-table-with-tree-grid'
 // 导入富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
 // 导入富文本编辑器相关的 css 样式
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
+// import 'quill/dist/quill.core.css' // import styles
+// import 'quill/dist/quill.snow.css' // for snow theme
+// import 'quill/dist/quill.bubble.css' // for bubble theme
 
 // 导入 nprogress 进度条效果 导入对应的 js 和 css
 import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+// import 'nprogress/nprogress.css'
 
 // axios配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8085/'

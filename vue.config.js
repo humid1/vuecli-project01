@@ -7,14 +7,15 @@ module.exports = {
   chainWebpack: config => {
     config.when(process.env.NODE_ENV === 'production', config => {
       config.entry('app').clear().add('./src/main-prod.js')
-      // 通过external加载外部 CDN 资源
+      // 通过external加载外部 CDN 资源，由于cdn无最新版的 vue-router 3.1.6 暂时注释
       config.set('externals', {
         vue: 'Vue',
-        'vue-router': 'VueRouter',
+        // 'vue-router': 'VueRouter',
         axios: 'axios',
         lodash: '_',
-        echart: 'echarts',
-        nprogress: 'NProgress'
+        echarts: 'echarts',
+        nprogress: 'NProgress',
+        'vue-quill-editor': 'VueQuillEditor'
       })
     })
     config.when(process.env.NODE_ENV === 'development', config => {
