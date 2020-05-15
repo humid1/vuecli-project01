@@ -17,10 +17,16 @@ import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 
+// 导入 nprogress 进度条效果 导入对应的 js 和 css
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 // axios配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8085/';
 // 请求拦截器
 axios.interceptors.request.use( config => {
+  // 在 请求拦截器中，展示进度条
+  NProgress.start()
   // 为请求头对象，添加token 验证的 Authorization 字段
   config.headers.Authorization = window.sessionStorage.getItem('token');
   return config;
@@ -28,6 +34,8 @@ axios.interceptors.request.use( config => {
 
 // 响应拦截器
 axios.interceptors.response.use( res => {
+  // 在响应拦截器中，隐藏进度条
+  NProgress.done()
   // 若请求码为 701 就移除token
   if(res.data.code === 701) {
     window.sessionStorage.removeItem('token')
