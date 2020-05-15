@@ -22,22 +22,22 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 // axios配置请求根路径
-axios.defaults.baseURL = 'http://127.0.0.1:8085/';
+axios.defaults.baseURL = 'http://127.0.0.1:8085/'
 // 请求拦截器
-axios.interceptors.request.use( config => {
+axios.interceptors.request.use(config => {
   // 在 请求拦截器中，展示进度条
   NProgress.start()
   // 为请求头对象，添加token 验证的 Authorization 字段
-  config.headers.Authorization = window.sessionStorage.getItem('token');
-  return config;
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
 })
 
 // 响应拦截器
-axios.interceptors.response.use( res => {
+axios.interceptors.response.use(res => {
   // 在响应拦截器中，隐藏进度条
   NProgress.done()
   // 若请求码为 701 就移除token
-  if(res.data.code === 701) {
+  if (res.data.code === 701) {
     window.sessionStorage.removeItem('token')
     // 跳转到登录页
     router.replace({
@@ -49,7 +49,7 @@ axios.interceptors.response.use( res => {
 })
 
 // 将 axios 挂载到 vue 上，prototype后的名字可以随便定义
-Vue.prototype.$http = axios;
+Vue.prototype.$http = axios
 // 全局注册组件
 Vue.component('tree-table', TreeTable)
 // 将富文本编辑器，注册为全局可用组件
@@ -72,7 +72,6 @@ Vue.filter('dateFormat', originVal => {
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-
 
 new Vue({
   router,

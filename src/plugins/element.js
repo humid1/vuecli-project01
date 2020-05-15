@@ -1,14 +1,15 @@
 import Vue from 'vue'
-import { Button, Form, FormItem, Input, Message, Avatar,
-    Container, Header, Aside, Main, 
-    Menu, Submenu, MenuItemGroup, menuItem,
-    Breadcrumb, BreadcrumbItem,
-    Card, Row, Col, Table, TableColumn,
-    Switch, Tooltip, Pagination, Loading,
-    Dialog, MessageBox, Tag, Tree,
-    Select, Option, Cascader, Alert,
-    Tabs, TabPane, Steps, Step, CheckboxGroup, Checkbox,
-    Upload, Timeline, TimelineItem
+import {
+  Button, Form, FormItem, Input, Message, Avatar,
+  Container, Header, Aside, Main,
+  Menu, Submenu, MenuItemGroup, menuItem,
+  Breadcrumb, BreadcrumbItem,
+  Card, Row, Col, Table, TableColumn,
+  Switch, Tooltip, Pagination, Loading,
+  Dialog, MessageBox, Tag, Tree,
+  Select, Option, Cascader, Alert,
+  Tabs, TabPane, Steps, Step, CheckboxGroup, Checkbox,
+  Upload, Timeline, TimelineItem
 } from 'element-ui'
 
 Vue.use(Button)

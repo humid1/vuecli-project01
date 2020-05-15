@@ -18,19 +18,24 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
-  { path: '/home', component: Home , redirect: '/welcome', children: [
-    { path: '/welcome', component: Welcome },
-    { path: '/users', component: Users },
-    { path: '/auths', component: Auths },
-    { path: '/roles', component: Roles },
-    { path: '/categories', component: Cate },
-    { path: '/params', component: Params },
-    { path: '/goods', component: List },
-    { path: '/goods/add', component: Add },
-    { path: '/goods/edit/:gid', component: Edit, props: true },
-    { path: '/orders', component: Order },
-    { path: '/reports', component: Report },
-  ]},
+  {
+    path: '/home',
+    component: Home,
+    redirect: '/welcome',
+    children: [
+      { path: '/welcome', component: Welcome },
+      { path: '/users', component: Users },
+      { path: '/auths', component: Auths },
+      { path: '/roles', component: Roles },
+      { path: '/categories', component: Cate },
+      { path: '/params', component: Params },
+      { path: '/goods', component: List },
+      { path: '/goods/add', component: Add },
+      { path: '/goods/edit/:gid', component: Edit, props: true },
+      { path: '/orders', component: Order },
+      { path: '/reports', component: Report }
+    ]
+  }
 ]
 
 const router = new VueRouter({
@@ -38,18 +43,18 @@ const router = new VueRouter({
 })
 
 // 挂载路由导航守卫
-router.beforeEach( (to, from, next) => {
+router.beforeEach((to, from, next) => {
   // 如果用户访问登录页，直接放行
-  if(to.path === '/login') {
-      return next();
+  if (to.path === '/login') {
+    return next()
   }
   // 从 sessionStorage 中获取到保存的 token 值
-  const tokenStr = window.sessionStorage.getItem('token');
+  const tokenStr = window.sessionStorage.getItem('token')
   // 没有 token，强制跳转到登录页
-  if(!tokenStr){
-      return next('/login');
+  if (!tokenStr) {
+    return next('/login')
   }
-  next();
+  next()
 })
 
 export default router
